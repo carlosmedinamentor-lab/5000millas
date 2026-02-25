@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5,000 Millas · El Manifiesto</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --void: #04040a;
+  --deep: #080810;
+  --surface: #0c0c18;
+  --panel: #101020;
+  --border: #1a1a2e;
+  --border-gold: #8b6914;
+  --gold: #c9a84c;
+  --gold-light: #e2c97e;
+  --gold-dim: #7a5e28;
+  --gold-glow: rgba(201,168,76,0.12);
+  --gold-glow-strong: rgba(201,168,76,0.25);
+  --cream: #f5f0e8;
+  --text: #e8e4da;
+  --muted: #6a6458;
+  --faint: #2a2418;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--void);
+  color: var(--text);
+  font-family: 'EB Garamond', serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+.cursor {
+  position: fixed;
+  width: 8px; height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease;
+  mix-blend-mode: screen;
+}
+.cursor-ring {
+  position: fixed;
+  width: 32px; height: 32px;
+  border: 1px solid var(--gold);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.4;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* NOISE TEXTURE */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.6;
+}
+
+/* LANGUAGE TOGGLE */
+.lang-toggle {
+  position: fixed;
+  top: 32px;
+  right: 40px;
+  z-index: 100;
+  display: flex;
+  gap: 0;
+}
+.lang-btn {
+  background: none;
+  border: 1px solid var(--border-gold);
+  color: var(--muted);
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  padding: 8px 16px;
+  cursor: none;
+  transition: all 0.3s;
+}
+.lang-btn.active {
+  background: var(--gold);
+  color: var(--void);
+  border-color: var(--gold);
+}
+.lang-btn:hover { color: var(--gold-light); }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  z-index: 50;
+  padding: 28px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid transparent;
+  transition: all 0.5s;
+}
+nav.scrolled {
+  background: rgba(4,4,10,0.95);
+  border-bottom-color: var(--border);
+  backdrop-filter: blur(20px);
+  padding: 18px 60px;
+}
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 13px;
+  letter-spacing: 6px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  padding: 0 40px;
+}
+
+/* RADIAL GLOW */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ORNAMENTAL LINES */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+
+.hero-eyebrow {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 8px;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 48px;
+  opacity: 0;
+  animation: riseIn 1.2s 0.3s ease both;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 12vw, 9rem);
+  font-weight: 300;
+  line-height: 0.9;
+  text-align: center;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: riseIn 1.4s 0.5s ease both;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+  display: block;
+}
+
+.hero-number {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+  letter-spacing: 8px;
+  color: var(--gold);
+  text-align: center;
+  margin-bottom: 56px;
+  opacity: 0;
+  animation: riseIn 1.4s 0.7s ease both;
+}
+
+.hero-tagline {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+  max-width: 600px;
+  line-height: 1.8;
+  margin-bottom: 80px;
+  opacity: 0;
+  animation: riseIn 1.4s 0.9s ease both;
+}
+
+.scroll-indicator {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: riseIn 1s 1.8s ease both;
+}
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+.scroll-text {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 4px;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+/* ORNAMENT SVG */
+.ornament {
+  color: var(--gold-dim);
+  font-size: 1.5rem;
+  letter-spacing: 12px;
+  text-align: center;
+  margin: 0 auto 40px;
+  opacity: 0;
+  animation: riseIn 1s 1.2s ease both;
+}
+
+/* SECTIONS */
+section {
+  position: relative;
+  z-index: 2;
+}
+
+.section-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 120px 40px;
+}
+
+.section-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 8px;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.section-label::before {
+  content: '';
+  width: 40px; height: 1px;
+  background: var(--gold-dim);
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 48px;
+  letter-spacing: -1px;
+}
+
+.section-title em { font-style: italic; color: var(--gold); }
+
+.body-text {
+  font-family: 'EB Garamond', serif;
+  font-size: 1.2rem;
+  line-height: 2;
+  color: #a09888;
+  margin-bottom: 32px;
+}
+
+/* EQUATION BLOCK */
+.equation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  padding: 80px 40px;
+  margin: 60px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.equation::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, var(--gold-glow), transparent);
+}
+
+.eq-symbol {
+  text-align: center;
+}
+.eq-icon {
+  font-size: 3.5rem;
+  display: block;
+  margin-bottom: 12px;
+}
+.eq-name {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 6px;
+  color: var(--gold);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 6px;
+}
+.eq-desc {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+.eq-operator {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 4rem;
+  color: var(--gold-dim);
+  font-weight: 300;
+  position: relative;
+  z-index: 1;
+}
+
+/* 7 DIMENSIONS */
+.dimensions-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+  margin: 60px 0;
+}
+.dim-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 24px 12px;
+  text-align: center;
+  transition: all 0.4s;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+}
+.dim-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transition: transform 0.4s;
+}
+.dim-card:hover::before { transform: scaleX(1); }
+.dim-card:hover { background: var(--surface); }
+
+.dim-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.4;
+  margin-bottom: 8px;
+}
+.dim-name {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--text);
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+/* VERSE */
+.verse-block {
+  border-left: 2px solid var(--gold);
+  padding: 32px 40px;
+  margin: 60px 0;
+  background: var(--gold-glow);
+}
+.verse-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--cream);
+  margin-bottom: 12px;
+}
+.verse-ref {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+/* VISION CARDS */
+.vision-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 60px 0;
+}
+.vision-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s;
+}
+.vision-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, var(--gold-glow), transparent);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.vision-card:hover::after { opacity: 1; }
+.vision-card-label {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.vision-card-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  color: var(--cream);
+}
+.vision-card-body {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  line-height: 1.9;
+  color: var(--muted);
+}
+
+/* FORMULA 20-20-20 */
+.formula-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 60px 0;
+}
+.formula-block {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 48px 32px;
+  text-align: center;
+}
+.formula-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.formula-unit {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+.formula-desc {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* COMPANIES */
+.companies-section {
+  background: var(--deep);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.companies-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 40px 0;
+}
+.company-tile {
+  border: 1px solid var(--border);
+  padding: 32px 24px;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.company-tile.active { border-color: var(--gold-dim); }
+.company-tile.active .company-status { color: var(--gold); }
+
+.company-tile::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+.company-tile:hover::before { transform: scaleX(1); }
+
+.company-name {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--text);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.company-desc {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.company-status {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--border-gold);
+  text-transform: uppercase;
+}
+
+/* VALUES */
+.values-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 60px 0;
+}
+.value-row {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 0;
+  border: 1px solid var(--border);
+  transition: all 0.3s;
+}
+.value-row:hover { border-color: var(--gold-dim); }
+.value-num {
+  background: var(--faint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.2rem;
+  color: var(--gold-dim);
+  border-right: 1px solid var(--border);
+}
+.value-content {
+  padding: 24px 32px;
+}
+.value-name {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.value-desc {
+  font-family: 'EB Garamond', serif;
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+/* INTERNAL SECTION */
+.internal-section {
+  background: var(--surface);
+  border-top: 2px solid var(--gold-dim);
+}
+.internal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--faint);
+  border: 1px solid var(--gold-dim);
+  padding: 8px 20px;
+  margin-bottom: 40px;
+}
+.internal-badge span {
+  font-family: 'Cinzel', serif;
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.internal-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+.ops-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 40px 0;
+}
+.ops-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 36px 28px;
+}
+.ops-icon {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+  display: block;
+}
+.ops-title {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.ops-body {
+  font-family: 'EB Garamond', serif;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+/* DIVIDER */
+.divider {
+  text-align: center;
+  padding: 60px 0;
+  position: relative;
+}
+.divider::before, .divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 60px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border));
+}
+.divider::before { left: 0; }
+.divider::after { right: 0; background: linear-gradient(90deg, var(--border), transparent); }
+.divider-symbol {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.5rem;
+  color: var(--gold-dim);
+  letter-spacing: 20px;
+}
+
+/* FOOTER */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo {
+  font-family: 'Cinzel', serif;
+  font-size: 16px;
+  letter-spacing: 8px;
+  color: var(--gold);
+}
+.footer-sub {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--muted);
+}
+.footer-copy {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--muted);
+}
+
+/* WORLD MAP HERO BG */
+.hero-worldmap {
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500'%3E%3Cpath fill='%23c9a84c' d='M150 120 Q180 100 220 110 Q260 90 280 120 Q300 140 270 160 Q240 180 200 170 Q160 160 140 140 Z M300 80 Q340 60 380 70 Q420 55 450 80 Q470 100 440 120 Q410 140 370 130 Q330 120 310 100 Z M500 60 Q550 40 600 55 Q640 45 670 70 Q690 90 660 110 Q630 130 580 120 Q540 110 520 90 Z M700 90 Q740 75 770 90 Q800 100 790 120 Q775 140 740 135 Q710 125 700 110 Z M100 200 Q140 185 170 200 Q200 210 190 230 Q175 250 145 245 Q115 235 100 220 Z M250 220 Q290 205 320 220 Q350 230 340 255 Q320 275 285 268 Q255 258 245 240 Z M420 190 Q470 170 510 185 Q545 195 535 220 Q518 240 475 235 Q440 225 420 210 Z M600 170 Q650 155 690 170 Q725 182 715 205 Q698 225 655 218 Q620 208 605 190 Z M800 140 Q840 125 870 140 Q898 152 885 175 Q868 195 830 188 Q798 178 785 160 Z M180 300 Q220 285 255 300 Q285 312 275 335 Q258 355 220 348 Q188 338 175 320 Z M380 280 Q425 265 460 282 Q492 295 480 320 Q462 340 420 332 Q385 322 370 305 Z M580 270 Q625 255 660 272 Q692 285 680 310 Q662 330 620 322 Q585 312 570 295 Z M780 250 Q820 235 850 252 Q878 265 865 290 Q848 310 808 302 Q775 292 762 275 Z'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+}
+
+/* METHODS STRIP */
+.methods-strip {
+  background: var(--faint);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 32px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+.method-item {
+  text-align: center;
+}
+.method-name {
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.method-label {
+  font-family: 'EB Garamond', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.methods-divider {
+  width: 1px;
+  height: 40px;
+  background: var(--border);
+}
+
+/* SOCIAL PROOF */
+.proof-bar {
+  background: var(--panel);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.proof-stat {
+  text-align: center;
+}
+.proof-number {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+.proof-text {
+  font-family: 'Cinzel', serif;
+  font-size: 8px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+.proof-sep {
+  width: 1px;
+  height: 36px;
+  background: var(--border);
+}
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* LANGUAGE LAYERS — default: Spanish */
+.en { display: none !important; }
+span.en { display: none !important; }
+
+body.lang-en .es { display: none !important; }
+body.lang-en span.es { display: none !important; }
+body.lang-en .en { display: block !important; }
+body.lang-en span.en { display: inline !important; }
+
+/* ANIMATIONS */
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.2); }
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav { padding: 20px 24px; }
+  nav.scrolled { padding: 14px 24px; }
+  .nav-links { display: none; }
+  .lang-toggle { top: 20px; right: 24px; }
+  .section-inner { padding: 80px 24px; }
+  .equation { flex-direction: column; gap: 16px; }
+  .dimensions-grid { grid-template-columns: repeat(4, 1fr); }
+  .vision-grid, .formula-row, .companies-grid, .ops-grid { grid-template-columns: 1fr; }
+  footer { flex-direction: column; gap: 20px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LANG TOGGLE -->
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('es')" id="btn-es">ES</button>
+  <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <div class="nav-logo">5,000 Millas</div>
+  <ul class="nav-links">
+    <li><a href="#origen"><span class="es">Origen</span><span class="en">Origin</span></a></li>
+    <li><a href="#metodo"><span class="es">Método</span><span class="en">Method</span></a></li>
+    <li><a href="#vision"><span class="es">Visión</span><span class="en">Vision</span></a></li>
+    <li><a href="#empresas"><span class="es">Empresas</span><span class="en">Companies</span></a></li>
+    <li><a href="#operaciones"><span class="es">Operaciones</span><span class="en">Operations</span></a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-worldmap"></div>
+  <p class="hero-eyebrow">
+    <span class="es">Manifiesto Fundacional · Carlos Medina</span>
+    <span class="en">Founding Manifesto · Carlos Medina</span>
+  </p>
+
+  <!-- LOGO MEDALLION -->
+  <div class="logo-medallion" style="margin-bottom:40px;opacity:0;animation:riseIn 1.4s 0.4s ease both;">
+    <svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="medallionBg" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#141208"/>
+          <stop offset="100%" stop-color="#060604"/>
+        </radialGradient>
+        <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#e8d48a"/>
+          <stop offset="50%" stop-color="#c9a84c"/>
+          <stop offset="100%" stop-color="#8b6914"/>
+        </linearGradient>
+        <linearGradient id="goldGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stop-color="#e8d48a"/>
+          <stop offset="100%" stop-color="#a07820"/>
+        </linearGradient>
+        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="1.5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Background circle -->
+      <circle cx="90" cy="90" r="87" fill="url(#medallionBg)"/>
+      <!-- Outer gold ring -->
+      <circle cx="90" cy="90" r="86" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+      <!-- Inner ring subtle -->
+      <circle cx="90" cy="90" r="80" fill="none" stroke="url(#goldGrad)" stroke-width="0.4" opacity="0.35"/>
+      
+      <!-- MAST (vertical center line) -->
+      <line x1="90" y1="52" x2="90" y2="100" stroke="url(#goldGrad2)" stroke-width="1.5" stroke-linecap="round"/>
+      
+      <!-- MAIN SAIL (left, larger) -->
+      <path d="M89 54 L89 98 Q76 92 68 80 Q64 72 70 64 Z" fill="url(#goldGrad)" opacity="0.95"/>
+      
+      <!-- FRONT SAIL (right, smaller) -->
+      <path d="M91 58 L91 96 Q100 88 106 76 Q109 68 103 62 Z" fill="url(#goldGrad)" opacity="0.75"/>
+      
+      <!-- HULL -->
+      <path d="M66 100 Q90 110 114 100 Q110 108 90 113 Q70 108 66 100Z" fill="url(#goldGrad2)"/>
+      
+      <!-- WAVE LINE -->
+      <path d="M58 107 Q66 103 74 107 Q82 111 90 107 Q98 103 106 107 Q114 111 122 107" 
+            stroke="url(#goldGrad)" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.6"/>
+      
+      <!-- SWALLOW LEFT -->
+      <path d="M50 68 Q54 63 57 67 Q58 63 62 65 Q57 70 56 75 Q54 70 50 68Z" fill="url(#goldGrad)" filter="url(#glow)"/>
+      
+      <!-- SWALLOW RIGHT -->
+      <path d="M118 62 Q122 57 125 61 Q126 57 130 59 Q125 64 124 69 Q122 64 118 62Z" fill="url(#goldGrad)" filter="url(#glow)"/>
+
+      <!-- 5MIL text -->
+      <text x="90" y="138" font-family="Georgia, 'Times New Roman', serif" font-size="20" font-weight="bold" 
+            fill="url(#goldGrad)" text-anchor="middle" filter="url(#glow)" letter-spacing="1">5MIL</text>
+      <!-- MILLAS text -->
+      <text x="90" y="153" font-family="Georgia, 'Times New Roman', serif" font-size="9" 
+            fill="url(#goldGrad)" text-anchor="middle" opacity="0.85" letter-spacing="6">MILLAS</text>
+    </svg>
+  </div>
+
+  <h1 class="hero-title">
+    <span class="es">El viaje más<br><em>emocionante</em></span>
+    <span class="en">The most<br><em>extraordinary</em> journey</span>
+  </h1>
+  <div class="hero-number">5,000 MILLAS</div>
+  <p class="hero-tagline">
+    <span class="es">"El viaje más emocionante no es al centro de la tierra ni a los confines del universo, sino al fondo de uno mismo." — Julio Verne</span>
+    <span class="en">"The most exciting journey is not to the center of the earth nor to the ends of the universe, but to the depths of oneself." — Jules Verne</span>
+  </p>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <div class="scroll-text"><span class="es">Descender</span><span class="en">Descend</span></div>
+  </div>
+</div>
+
+<!-- PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-stat">
+    <div class="proof-number">+1,000</div>
+    <div class="proof-text"><span class="es">Vidas impactadas</span><span class="en">Lives impacted</span></div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-stat">
+    <div class="proof-number">+20</div>
+    <div class="proof-text"><span class="es">Expertos publicados</span><span class="en">Experts published</span></div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-stat">
+    <div class="proof-number">21</div>
+    <div class="proof-text"><span class="es">Días de proceso editorial</span><span class="en">Days to publish</span></div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-stat">
+    <div class="proof-number">+10</div>
+    <div class="proof-text"><span class="es">Libros escritos</span><span class="en">Books written</span></div>
+  </div>
+  <div class="proof-sep"></div>
+  <div class="proof-stat">
+    <div class="proof-number">35</div>
+    <div class="proof-text"><span class="es">Proyectos en desarrollo</span><span class="en">Projects in development</span></div>
+  </div>
+</div>
+
+<!-- METHODS STRIP -->
+<div class="methods-strip">
+  <div class="method-item">
+    <div class="method-name"><span class="es">Método Simba</span><span class="en">Simba Method</span></div>
+    <div class="method-label"><span class="es">Transformación personal en 21 días</span><span class="en">Personal transformation in 21 days</span></div>
+  </div>
+  <div class="methods-divider"></div>
+  <div class="method-item">
+    <div class="method-name"><span class="es">Método Diamante</span><span class="en">Diamond Method</span></div>
+    <div class="method-label"><span class="es">Forja una vida legendaria en 7 dimensiones</span><span class="en">Forge a legendary life in 7 dimensions</span></div>
+  </div>
+  <div class="methods-divider"></div>
+  <div class="method-item">
+    <div class="method-name"><span class="es">Método Empoderador</span><span class="en">Empowerment Method</span></div>
+    <div class="method-label"><span class="es">Desafío de 7 días para impulsar tu grandeza</span><span class="en">7-day challenge to ignite your greatness</span></div>
+  </div>
+  <div class="methods-divider"></div>
+  <div class="method-item">
+    <div class="method-name">Amazon · @oficialcarlosmedina</div>
+    <div class="method-label"><span class="es">Todos los libros disponibles</span><span class="en">All books available</span></div>
+  </div>
+</div>
+
+<!-- ORIGEN -->
+<section id="origen">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <span class="es">Origen</span><span class="en">Origin</span>
+    </div>
+    <h2 class="section-title reveal">
+      <span class="es">De dónde<br><em>venimos</em></span>
+      <span class="en">Where we<br><em>come from</em></span>
+    </h2>
+    <p class="body-text reveal">
+      <span class="es">En la antigüedad, los marineros que recorrían cinco mil millas de océano tormentoso eran reconocidos por su pueblo con dos golondrinas tatuadas en el pecho. No era un adorno. Era un testimonio. Habían visto el abismo y habían regresado.</span>
+      <span class="en">In ancient times, sailors who crossed five thousand miles of stormy ocean were recognized by their people with two swallows tattooed on their chest. It was not an ornament. It was a testimony. They had seen the abyss and returned.</span>
+    </p>
+    <p class="body-text reveal">
+      <span class="es">En 2021, en medio de crisis, deudas y el silencio que antecede a toda transformación, esa historia encontró a Carlos Medina. Y nació 5,000 Millas: la convicción de que el viaje más importante que un ser humano puede emprender no es hacia afuera, sino hacia adentro.</span>
+      <span class="en">In 2021, amid crisis, debt, and the silence that precedes all transformation, that story found Carlos Medina. And 5,000 Millas was born: the conviction that the most important journey a human being can undertake is not outward, but inward.</span>
+    </p>
+
+    <div class="verse-block reveal">
+      <p class="verse-text">
+        <span class="es">"Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio."</span>
+        <span class="en">"For God has not given us a spirit of fear, but of power, love and self-discipline."</span>
+      </p>
+      <p class="verse-ref">2 Timoteo 1:7</p>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">⸻ ✦ ⸻</span></div>
+  </div>
+</section>
+
+<!-- MÉTODO BDL -->
+<section id="metodo">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <span class="es">El Método</span><span class="en">The Method</span>
+    </div>
+    <h2 class="section-title reveal">
+      <span class="es">Barco · Diamante<br><em>· León</em></span>
+      <span class="en">Ship · Diamond<br><em>· Lion</em></span>
+    </h2>
+    <p class="body-text reveal">
+      <span class="es">Una ecuación simbólica que contiene toda la filosofía. Simple en su forma. Infinita en su profundidad.</span>
+      <span class="en">A symbolic equation that contains the entire philosophy. Simple in form. Infinite in depth.</span>
+    </p>
+
+    <div class="equation reveal">
+      <div class="eq-symbol">
+        <span class="eq-icon">⛵</span>
+        <span class="eq-name"><span class="es">Barco</span><span class="en">Ship</span></span>
+        <span class="eq-desc"><span class="es">Autoconocimiento</span><span class="en">Self-Knowledge</span></span>
+      </div>
+      <div class="eq-operator">+</div>
+      <div class="eq-symbol">
+        <span class="eq-icon">💎</span>
+        <span class="eq-name"><span class="es">Diamante</span><span class="en">Diamond</span></span>
+        <span class="eq-desc"><span class="es">Las 7 Dimensiones</span><span class="en">The 7 Dimensions</span></span>
+      </div>
+      <div class="eq-operator">=</div>
+      <div class="eq-symbol">
+        <span class="eq-icon">🦁</span>
+        <span class="eq-name"><span class="es">León</span><span class="en">Lion</span></span>
+        <span class="eq-desc"><span class="es">Tu verdadera identidad</span><span class="en">Your true identity</span></span>
+      </div>
+    </div>
+
+    <div class="vision-grid reveal">
+      <div class="vision-card">
+        <p class="vision-card-label"><span class="es">El Barco</span><span class="en">The Ship</span></p>
+        <h3 class="vision-card-title">
+          <span class="es">El viaje hacia la comprensión de la verdad</span>
+          <span class="en">The journey toward understanding truth</span>
+        </h3>
+        <p class="vision-card-body">
+          <span class="es">¿Para qué sirve conocerse a uno mismo? No para coleccionar información sobre ti. Sino para llegar a una comprensión más profunda de la verdad: que eres una persona única, llamada, con un propósito que nadie más puede cumplir. El barco no te lleva a la religión. Te lleva a ti mismo. Y en ese viaje, descubres lo que siempre estuvo ahí. Ese es el viaje de los cinco mil millas.</span>
+          <span class="en">What is self-knowledge for? Not to collect information about yourself. But to reach a deeper understanding of truth: that you are a unique person, called, with a purpose no one else can fulfill. The ship does not take you to religion. It takes you to yourself. And on that journey, you discover what was always there.</span>
+        </p>
+      </div>
+      <div class="vision-card">
+        <p class="vision-card-label"><span class="es">El Diamante</span><span class="en">The Diamond</span></p>
+        <h3 class="vision-card-title">
+          <span class="es">Carbón que soportó una presión extraordinaria</span>
+          <span class="en">Carbon that endured extraordinary pressure</span>
+        </h3>
+        <p class="vision-card-body">
+          <span class="es">Un diamante es un pedazo de carbón que soportó una presión extraordinaria. Como Miguel Ángel con su escultura, la vida va quitando lo que sobra para revelar la obra maestra. El diamante tiene siete facetas: salud física, mental, emocional, espiritual, expresiva, interpersonal y financiera. Cultivarlas todas es el trabajo de una vida extraordinaria.</span>
+          <span class="en">A diamond is a piece of carbon that withstood extraordinary pressure. Like Michelangelo with his sculpture, life removes what is unnecessary to reveal the masterpiece. The diamond has seven facets: physical, mental, emotional, spiritual, expressive, interpersonal and financial health. Cultivating all of them is the work of an extraordinary life.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- EL LEÓN -->
+    <div class="verse-block reveal" style="margin-top:0;">
+      <p class="verse-text">
+        <span class="es">⛵ + 💎 = 🦁 · El León es el resultado. No se busca. Se revela.</span>
+        <span class="en">⛵ + 💎 = 🦁 · The Lion is the result. It is not sought. It is revealed.</span>
+      </p>
+    </div>
+    <div class="vision-grid reveal">
+      <div class="vision-card" style="grid-column: 1 / -1;">
+        <p class="vision-card-label"><span class="es">El León · Tu verdadera identidad</span><span class="en">The Lion · Your true identity</span></p>
+        <h3 class="vision-card-title">
+          <span class="es">No te ha dado Dios espíritu de cobardía, sino de poder</span>
+          <span class="en">God has not given you a spirit of fear, but of power</span>
+        </h3>
+        <p class="vision-card-body">
+          <span class="es">Cuando recorres las cinco mil millas hacia adentro y cultivas las siete dimensiones del diamante, algo ocurre: dejas de vivir desde el miedo y empiezas a vivir desde tu verdadera identidad. El León no es arrogancia. Es la expresión plena del poder, amor y dominio propio que Dios depositó en ti desde el principio. Simba no necesitaba convertirse en otro. Solo necesitaba recordar quién era. Tú también. Todos lo necesitamos.</span>
+          <span class="en">When you travel the five thousand miles inward and cultivate the seven dimensions of the diamond, something happens: you stop living from fear and begin living from your true identity. The Lion is not arrogance. It is the full expression of the power, love and self-discipline that God placed in you from the beginning. Simba did not need to become someone else. He only needed to remember who he was. So do you. So do we all.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- 7 DIMENSIONS -->
+    <p class="section-label reveal">
+      <span class="es">Las 7 Dimensiones del Diamante</span>
+      <span class="en">The 7 Facets of the Diamond</span>
+    </p>
+    <div class="dimensions-grid reveal">
+      <div class="dim-card">
+        <div class="dim-number">I</div>
+        <div class="dim-name"><span class="es">Física</span><span class="en">Physical</span></div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-number">II</div>
+        <div class="dim-name"><span class="es">Mental</span><span class="en">Mental</span></div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-number">III</div>
+        <div class="dim-name"><span class="es">Emocional</span><span class="en">Emotional</span></div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-number">IV</div>
+        <div class="dim-name"><span class="es">Espiritual</span><span class="en">Spiritual</span></div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-number">V</div>
+        <div class="dim-name"><span class="es">Expresiva</span><span class="en">Expressive</span></div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-number">VI</div>
+        <div class="dim-name"><span class="es">Interper&shy;sonal</span><span class="en">Interpersonal</span></div>
+      </div>
+      <div class="dim-card">
+        <div class="dim-number">VII</div>
+        <div class="dim-name"><span class="es">Financiera</span><span class="en">Financial</span></div>
+      </div>
+    </div>
+
+    <!-- FORMULA 20-20-20 -->
+    <p class="body-text reveal">
+      <span class="es">La disciplina que activa el diamante: veinte minutos cada día para cada dimensión. Inspirada en Robin Sharma. Perfeccionada en trinchera.</span>
+      <span class="en">The discipline that activates the diamond: twenty minutes each day for each dimension. Inspired by Robin Sharma. Perfected in the trenches.</span>
+    </p>
+    <div class="formula-row reveal">
+      <div class="formula-block">
+        <div class="formula-number">20</div>
+        <div class="formula-unit"><span class="es">min · Movimiento</span><span class="en">min · Movement</span></div>
+        <div class="formula-desc"><span class="es">El cuerpo como templo del espíritu. Sin salud física, todo lo demás colapsa.</span><span class="en">The body as temple of the spirit. Without physical health, everything else collapses.</span></div>
+      </div>
+      <div class="formula-block">
+        <div class="formula-number">20</div>
+        <div class="formula-unit"><span class="es">min · Reflexión</span><span class="en">min · Reflection</span></div>
+        <div class="formula-desc"><span class="es">Silencio, oración, meditación. La fuente de toda sabiduría real.</span><span class="en">Silence, prayer, meditation. The source of all real wisdom.</span></div>
+      </div>
+      <div class="formula-block">
+        <div class="formula-number">20</div>
+        <div class="formula-unit"><span class="es">min · Crecimiento</span><span class="en">min · Growth</span></div>
+        <div class="formula-desc"><span class="es">Lectura, aprendizaje, expansión del mapa mental. Leer es viajar sin moverse.</span><span class="en">Reading, learning, expanding the mental map. Reading is traveling without moving.</span></div>
+      </div>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">⸻ ✦ ⸻</span></div>
+  </div>
+</section>
+
+<!-- VISIÓN / MISIÓN -->
+<section id="vision">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <span class="es">Visión · Misión · Propósito</span><span class="en">Vision · Mission · Purpose</span>
+    </div>
+    <h2 class="section-title reveal">
+      <span class="es">Erradicar la<br><em>pobreza mental</em></span>
+      <span class="en">Eradicating<br><em>mental poverty</em></span>
+    </h2>
+
+    <div class="vision-grid reveal">
+      <div class="vision-card">
+        <p class="vision-card-label"><span class="es">Visión</span><span class="en">Vision</span></p>
+        <h3 class="vision-card-title">
+          <span class="es">Un conglomerado de 5,000 empresas construido entre todos</span>
+          <span class="en">A conglomerate of 5,000 companies built together</span>
+        </h3>
+        <p class="vision-card-body">
+          <span class="es">5,000 Millas no es la empresa de una persona. Es una invitación. Un ecosistema abierto donde emprendedores, líderes y creadores que comparten esta filosofía pueden fundar, unirse y hacer crecer empresas que resuelven necesidades reales con excelencia y propósito. Cada empresa que se suma es una piedra más en el puente.</span>
+          <span class="en">5,000 Millas is not one person's company. It is an invitation. An open ecosystem where entrepreneurs, leaders and creators who share this philosophy can found, join and grow companies that solve real needs with excellence and purpose. Every company that joins is another stone in the bridge.</span>
+        </p>
+      </div>
+      <div class="vision-card">
+        <p class="vision-card-label"><span class="es">Misión</span><span class="en">Mission</span></p>
+        <h3 class="vision-card-title">
+          <span class="es">Despertar el león que duerme en cada persona</span>
+          <span class="en">Awaken the lion sleeping in every person</span>
+        </h3>
+        <p class="vision-card-body">
+          <span class="es">A través de libros, educación, tecnología y comunidad, creamos los sistemas que llevan a cada persona a descubrir, cultivar y expresar su verdadera identidad. Todos somos diamantes en proceso de ser pulidos. Nadie recorre las cinco mil millas solo.</span>
+          <span class="en">Through books, education, technology, and community, we create the systems that lead each person to discover, cultivate, and express their true identity. We are all diamonds in the process of being polished. No one crosses five thousand miles alone.</span>
+        </p>
+      </div>
+    </div>
+
+    <!-- COLOMBIA -->
+    <div class="verse-block reveal">
+      <p class="verse-text">
+        <span class="es">1,250 academias de transformación personal y profesional en Colombia. Llevar a Colombia a ser potencia mundial en educación e innovación.</span>
+        <span class="en">1,250 personal and professional transformation academies in Colombia. Making Colombia a world power in education and innovation.</span>
+      </p>
+      <p class="verse-ref"><span class="es">Visión Colombia 2035</span><span class="en">Colombia Vision 2035</span></p>
+    </div>
+
+    <!-- VALUES -->
+    <div class="section-label reveal">
+      <span class="es">Los 7 Valores Fundacionales</span><span class="en">The 7 Founding Values</span>
+    </div>
+    <div class="values-list reveal">
+      <div class="value-row">
+        <div class="value-num">I</div>
+        <div class="value-content">
+          <div class="value-name"><span class="es">Fe</span><span class="en">Faith</span></div>
+          <div class="value-desc"><span class="es">Dios al centro de todo. No como religión, sino como fuente de sabiduría, gracia y valentía. Jesús dijo: con fe como un grano de mostaza, las montañas se mueven.</span><span class="en">God at the center of everything. Not as religion, but as a source of wisdom, grace and courage. Jesus said: with faith like a mustard seed, mountains move.</span></div>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-num">II</div>
+        <div class="value-content">
+          <div class="value-name"><span class="es">Verdad</span><span class="en">Truth</span></div>
+          <div class="value-desc"><span class="es">La verdad nos hace libres. Comunicación simple, clara, sin elocuencia artificial. Decir lo que es, sin adornos.</span><span class="en">Truth sets us free. Simple, clear communication without artificial eloquence. Saying what is, without ornament.</span></div>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-num">III</div>
+        <div class="value-content">
+          <div class="value-name"><span class="es">Excelencia</span><span class="en">Excellence</span></div>
+          <div class="value-desc"><span class="es">Como Miguel Ángel: quitar lo que sobra hasta revelar la obra maestra. Cada producto, sistema y servicio refleja nuestra máxima capacidad.</span><span class="en">Like Michelangelo: removing what is unnecessary until the masterpiece is revealed. Every product, system and service reflects our maximum capacity.</span></div>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-num">IV</div>
+        <div class="value-content">
+          <div class="value-name"><span class="es">Perseverancia</span><span class="en">Perseverance</span></div>
+          <div class="value-desc"><span class="es">Un diamante es carbón que soportó una presión extraordinaria. Las crisis no nos destruyen. Nos definen.</span><span class="en">A diamond is carbon that withstood extraordinary pressure. Crises do not destroy us. They define us.</span></div>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-num">V</div>
+        <div class="value-content">
+          <div class="value-name"><span class="es">Servicio</span><span class="en">Service</span></div>
+          <div class="value-desc"><span class="es">El liderazgo más alto es el que sirve. Cada empresa de 5,000 Millas existe para resolver un problema real de una persona real.</span><span class="en">The highest leadership is that which serves. Every 5,000 Millas company exists to solve a real problem for a real person.</span></div>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-num">VI</div>
+        <div class="value-content">
+          <div class="value-name"><span class="es">Audacia</span><span class="en">Audacity</span></div>
+          <div class="value-desc"><span class="es">Explorar Marte, construir megayates, fundar ciudades: todo fue audacia primero. Hacemos lo que nos asusta porque sabemos que el poder de Dios no tiene límite.</span><span class="en">Exploring Mars, building megayachts, founding cities: all of it was audacity first. We do what scares us because we know God's power has no limit.</span></div>
+        </div>
+      </div>
+      <div class="value-row">
+        <div class="value-num">VII</div>
+        <div class="value-content">
+          <div class="value-name"><span class="es">Legado</span><span class="en">Legacy</span></div>
+          <div class="value-desc"><span class="es">No construimos para nosotros. Construimos para las generaciones que vendrán. Cada libro, academia y empresa es una piedra del puente hacia el futuro.</span><span class="en">We do not build for ourselves. We build for the generations to come. Every book, academy and company is a stone in the bridge to the future.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"><span class="divider-symbol">⸻ ✦ ⸻</span></div>
+  </div>
+</section>
+
+<!-- EMPRESAS -->
+<section id="empresas" class="companies-section">
+  <div class="section-inner">
+    <div class="section-label reveal">
+      <span class="es">El Conglomerado</span><span class="en">The Conglomerate</span>
+    </div>
+    <h2 class="section-title reveal">
+      <span class="es">5,000 empresas.<br><em>Una visión.</em></span>
+      <span class="en">5,000 companies.<br><em>One vision.</em></span>
+    </h2>
+    <p class="body-text reveal">
+      <span class="es">Cada empresa nace cuando una necesidad real se cruza con nuestra capacidad de servirla con excelencia. No todas existen hoy. Pero todas están en camino.</span>
+      <span class="en">Each company is born when a real need intersects with our capacity to serve it with excellence. Not all exist today. But all are on the way.</span>
+    </p>
+    <div class="companies-grid reveal">
+      <div class="company-tile active">
+        <div class="company-name">5,000 Millas Editorial</div>
+        <div class="company-desc"><span class="es">Más de 20 expertos publicados en Amazon en 21 días. El método funciona porque nació de la práctica: más de 10 libros escritos y 35 proyectos en desarrollo. Métodos propios publicados: Simba, Empoderador, Diamante. Encuéntralos en Amazon o en @oficialcarlosmedina.</span><span class="en">More than 20 experts published on Amazon in 21 days. The method works because it was born from practice: 10+ books written and 35 projects in development. Published proprietary methods: Simba, Empoderador, Diamante. Find them on Amazon or at @oficialcarlosmedina.</span></div>
+        <div class="company-status">● <span class="es">Activa · Generando resultados</span><span class="en">Active · Generating results</span></div>
+      </div>
+      <div class="company-tile active">
+        <div class="company-name">5,000 Millas Universidad</div>
+        <div class="company-desc"><span class="es">Academia de transformación personal y profesional. Las 7 dimensiones del diamante en formación continua.</span><span class="en">Personal and professional transformation academy. The 7 diamond dimensions in continuous training.</span></div>
+        <div class="company-status">● <span class="es">Activa · En expansión</span><span class="en">Active · Expanding</span></div>
+      </div>
+      <div class="company-tile active">
+        <div class="company-name">5,000 Millas Tech</div>
+        <div class="company-desc"><span class="es">Automatización, agentes de IA y sistemas que eliminan la fricción. La inteligencia artificial al servicio del propósito.</span><span class="en">Automation, AI agents and systems that eliminate friction. Artificial intelligence in service of purpose.</span></div>
+        <div class="company-status">● <span class="es">Activa · En construcción</span><span class="en">Active · Under construction</span></div>
+      </div>
+      <div class="company-tile">
+        <div class="company-name">5,000 Millas Studios</div>
+        <div class="company-desc"><span class="es">Producción cinematográfica de Hollywood con IA. Los libros de nuestros clientes, convertidos en películas.</span><span class="en">Hollywood-level film production with AI. Our clients' books, turned into films.</span></div>
+        <div class="company-status">○ <span class="es">En visión</span><span class="en">In vision</span></div>
+      </div>
+      <div class="company-tile">
+        <div class="company-name">5,000 Millas Bank</div>
+        <div class="company-desc"><span class="es">Servicios financieros para la economía del conocimiento. La dimensión financiera del diamante, institucionalizada.</span><span class="en">Financial services for the knowledge economy. The diamond's financial dimension, institutionalized.</span></div>
+        <div class="company-status">○ <span class="es">En visión</span><span class="en">In vision</span></div>
+      </div>
+      <div class="company-tile">
+        <div class="company-name">5,000 Millas Airlines</div>
+        <div class="company-desc"><span class="es">Movilidad global para los líderes en tránsito. Porque las grandes ideas necesitan nuevos territorios.</span><span class="en">Global mobility for leaders in transit. Because great ideas need new territories.</span></div>
+        <div class="company-status">○ <span class="es">En visión</span><span class="en">In vision</span></div>
+      </div>
+      <div class="company-tile">
+        <div class="company-name">5,000 Millas Space</div>
+        <div class="company-desc"><span class="es">Exploración espacial al servicio de la humanidad. La fe más grande necesita el horizonte más amplio.</span><span class="en">Space exploration in service of humanity. The greatest faith needs the widest horizon.</span></div>
+        <div class="company-status">○ <span class="es">En visión</span><span class="en">In vision</span></div>
+      </div>
+      <div class="company-tile">
+        <div class="company-name">5,000 Millas + 4,993</div>
+        <div class="company-desc"><span class="es">Cada necesidad que Dios revele. Cada problema que podamos resolver con excelencia. La visión es suficientemente grande.</span><span class="en">Every need God reveals. Every problem we can solve with excellence. The vision is large enough.</span></div>
+        <div class="company-status">○ <span class="es">En proceso de revelación</span><span class="en">Being revealed</span></div>
+      </div>
+    </div>
+    <div class="divider"><span class="divider-symbol">⸻ ✦ ⸻</span></div>
+  </div>
+</section>
+
+<!-- OPERACIONES INTERNAS -->
+<section id="operaciones" class="internal-section">
+  <div class="section-inner">
+    <div class="internal-badge reveal">
+      <div class="internal-dot"></div>
+      <span><span class="es">Manual Interno · Solo para el equipo</span><span class="en">Internal Manual · Team Only</span></span>
+    </div>
+    <h2 class="section-title reveal">
+      <span class="es">Cómo operamos<br><em>por dentro</em></span>
+      <span class="en">How we operate<br><em>inside</em></span>
+    </h2>
+    <p class="body-text reveal">
+      <span class="es">La filosofía sin sistema es solo poesía. Esto es lo que convierte la visión en resultados concretos cada día.</span>
+      <span class="en">Philosophy without system is just poetry. This is what turns vision into concrete results every day.</span>
+    </p>
+    <div class="ops-grid reveal">
+      <div class="ops-card">
+        <span class="ops-icon">🤖</span>
+        <div class="ops-title"><span class="es">Meta-Agente IA</span><span class="en">AI Meta-Agent</span></div>
+        <div class="ops-body"><span class="es">Un sistema que construye otros sistemas. Cada flujo de trabajo que creamos nace desde el briefing de 5 preguntas, pasa por Claude API, se despliega en Make.com y se documenta en GitHub.</span><span class="en">A system that builds other systems. Every workflow we create is born from the 5-question brief, passes through Claude API, deploys in Make.com, and is documented in GitHub.</span></div>
+      </div>
+      <div class="ops-card">
+        <span class="ops-icon">📚</span>
+        <div class="ops-title"><span class="es">Proceso Editorial 21 Días</span><span class="en">21-Day Publishing Process</span></div>
+        <div class="ops-body"><span class="es">Extracción de conocimiento → Arquitectura del libro → Redacción capítulo a capítulo → Revisión → Publicación en Amazon KDP. Cada paso automatizado. La voz del autor, preservada.</span><span class="en">Knowledge extraction → Book architecture → Chapter-by-chapter writing → Review → Amazon KDP publication. Every step automated. The author's voice, preserved.</span></div>
+      </div>
+      <div class="ops-card">
+        <span class="ops-icon">⚡</span>
+        <div class="ops-title"><span class="es">Stack de Operaciones</span><span class="en">Operations Stack</span></div>
+        <div class="ops-body"><span class="es">Claude API como cerebro. Make.com como sistema nervioso. Notion como memoria. GitHub como archivo permanente. Stripe como sistema de pagos. Telegram como sistema de notificaciones.</span><span class="en">Claude API as brain. Make.com as nervous system. Notion as memory. GitHub as permanent archive. Stripe as payment system. Telegram as notification system.</span></div>
+      </div>
+      <div class="ops-card">
+        <span class="ops-icon">🎯</span>
+        <div class="ops-title"><span class="es">Regla del 20/80</span><span class="en">20/80 Rule</span></div>
+        <div class="ops-body"><span class="es">Identificar siempre el 20% de acciones que produce el 80% de resultados. Automatizar primero lo que más tiempo consume. Delegar a los agentes lo que no requiere criterio humano.</span><span class="en">Always identify the 20% of actions that produce 80% of results. Automate first what consumes the most time. Delegate to agents what requires no human judgment.</span></div>
+      </div>
+      <div class="ops-card">
+        <span class="ops-icon">📐</span>
+        <div class="ops-title"><span class="es">Criterio de Decisión</span><span class="en">Decision Criterion</span></div>
+        <div class="ops-body"><span class="es">Toda decisión pasa por tres filtros: ¿Está alineada con la visión? ¿Honra los 7 valores? ¿Sirve a una persona real con un problema real? Si las tres respuestas son sí: adelante.</span><span class="en">Every decision passes through three filters: Is it aligned with the vision? Does it honor the 7 values? Does it serve a real person with a real problem? If all three answers are yes: proceed.</span></div>
+      </div>
+      <div class="ops-card">
+        <span class="ops-icon">🌅</span>
+        <div class="ops-title"><span class="es">Protocolo Diario</span><span class="en">Daily Protocol</span></div>
+        <div class="ops-body"><span class="es">20-20-20 cada mañana antes de abrir el ordenador. Sabiduría pedida, valentía renovada, claridad obtenida. Solo entonces: ejecución. El fundador que no se cuida no puede cuidar a nadie.</span><span class="en">20-20-20 every morning before opening the computer. Wisdom requested, courage renewed, clarity obtained. Only then: execution. The founder who does not care for themselves cannot care for anyone.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">5,000 Millas</div>
+    <div class="footer-sub">
+      <span class="es">Erradicando la pobreza mental. Un libro, una academia, una empresa a la vez.</span>
+      <span class="en">Eradicating mental poverty. One book, one academy, one company at a time.</span>
+    </div>
+  </div>
+  <div style="text-align:center;">
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--gold-dim);margin-bottom:8px;">⛵ + 💎 = 🦁</div>
+    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;color:var(--muted);">BDL METHOD</div>
+  </div>
+  <div>
+    <div class="footer-copy">© 5,000 Millas · Carlos Medina</div>
+    <div class="footer-copy" style="margin-top:4px;">
+      <span class="es">Fundado en fe. Construido en excelencia.</span>
+      <span class="en">Founded in faith. Built in excellence.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 4 + 'px';
+  cursor.style.top = my - 4 + 'px';
+});
+
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx - 16 + 'px';
+  ring.style.top = ry - 16 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+
+// NAV SCROLL
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(el => obs.observe(el));
+
+// LANGUAGE TOGGLE
+function setLang(lang) {
+  document.body.classList.toggle('lang-en', lang === 'en');
+  document.getElementById('btn-es').classList.toggle('active', lang === 'es');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+}
+</script>
+</body>
+</html>
