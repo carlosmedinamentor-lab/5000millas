@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mentoría con Carlos Medina — Estructura tu identidad | 5.000 Millas</title>
+<meta name="description" content="Mentoría 1:1 para personas que sienten que su vida no refleja quiénes son realmente. Estructura, claridad y dirección. Método BDL.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0A;--card:#111;--border:#1A1A1A;--gold:#D4A574;--gold-light:#E8C9A0;--white:#FAFAF8;--lunar:#C8C4BC;--stone:#888880;--smoke:#444440;--fire:#C45A2C}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--lunar);font-family:'Outfit',sans-serif;font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased}
+::selection{background:var(--gold);color:var(--bg)}
+.ctr{max-width:900px;margin:0 auto;padding:0 24px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(212,165,116,.08);padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+nav .b{font-family:'Playfair Display',serif;font-size:11px;letter-spacing:6px;color:var(--gold);text-transform:uppercase}
+nav a{background:var(--gold);color:var(--bg);font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:10px 20px;border-radius:2px;text-decoration:none;transition:background .3s}
+nav a:hover{background:var(--gold-light)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 24px 80px;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 40%,rgba(212,165,116,.03) 0%,transparent 60%)}
+.hero .ctr{position:relative}
+.hl{font-size:10px;letter-spacing:6px;color:var(--smoke);text-transform:uppercase;margin-bottom:24px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,58px);font-weight:400;color:var(--white);line-height:1.15;margin-bottom:24px}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero-line{width:40px;height:2px;background:var(--gold);margin-bottom:24px}
+.hero p{font-size:17px;color:var(--stone);max-width:560px;margin-bottom:12px}
+.hero p strong{color:var(--lunar);font-weight:500}
+.hero-cta{display:inline-block;background:var(--gold);color:var(--bg);font-size:12px;font-weight:600;letter-spacing:3px;text-transform:uppercase;padding:16px 40px;border-radius:2px;text-decoration:none;margin-top:24px;transition:background .3s}
+.hero-cta:hover{background:var(--gold-light)}
+.hero-note{font-size:12px;color:var(--smoke);margin-top:12px}
+
+/* PAIN SECTION */
+.pain{padding:80px 0;border-top:1px solid var(--border)}
+.pain-q{font-family:'Playfair Display',serif;font-size:clamp(20px,3.5vw,32px);color:var(--white);line-height:1.4;margin-bottom:32px;text-align:center}
+.pain-list{max-width:600px;margin:0 auto}
+.pain-item{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:16px;color:var(--stone);padding-left:24px;position:relative}
+.pain-item::before{content:'';position:absolute;left:0;top:22px;width:8px;height:2px;background:var(--fire)}
+.pain-close{font-family:'Playfair Display',serif;font-size:20px;color:var(--gold);text-align:center;margin-top:40px;font-style:italic}
+
+/* BRIDGE */
+.bridge{padding:60px 0;text-align:center;background:radial-gradient(ellipse at 50% 50%,rgba(212,165,116,.03) 0%,transparent 60%)}
+.bridge p{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);color:var(--lunar);max-width:650px;margin:0 auto;line-height:1.5}
+.bridge p em{color:var(--gold);font-style:normal}
+
+/* WHAT THIS IS */
+.what{padding:80px 0;border-top:1px solid var(--border)}
+.st{font-family:'Playfair Display',serif;font-size:clamp(24px,4vw,34px);font-weight:400;color:var(--white);text-align:center;margin-bottom:40px}
+.what-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.wc{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:28px;transition:border-color .3s}
+.wc:hover{border-color:rgba(212,165,116,.3)}
+.wc-icon{font-size:22px;margin-bottom:10px}
+.wc-name{font-family:'Playfair Display',serif;font-size:17px;color:var(--white);margin-bottom:6px}
+.wc-desc{font-size:14px;color:var(--stone)}
+
+/* IS / IS NOT */
+.isnot{padding:60px 0;border-top:1px solid var(--border)}
+.isnot-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:700px;margin:32px auto 0}
+.isnot-col h3{font-family:'Playfair Display',serif;font-size:16px;margin-bottom:16px;padding-bottom:8px}
+.isnot-col.yes h3{color:var(--gold);border-bottom:1px solid rgba(212,165,116,.2)}
+.isnot-col.no h3{color:var(--fire);border-bottom:1px solid rgba(196,90,44,.2)}
+.isnot-item{font-size:14px;color:var(--stone);margin-bottom:10px;padding-left:16px;position:relative}
+.isnot-item::before{content:'';position:absolute;left:0;top:7px;width:6px;height:6px;border-radius:50%}
+.isnot-col.yes .isnot-item::before{background:var(--gold)}
+.isnot-col.no .isnot-item::before{background:var(--fire)}
+
+/* PRICING */
+.pricing{padding:80px 0;border-top:1px solid var(--border)}
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px}
+.plan{background:var(--card);border:1px solid var(--border);border-radius:2px;padding:32px 24px;position:relative;transition:border-color .3s}
+.plan:hover{border-color:rgba(212,165,116,.2)}
+.plan.ft{border:2px solid var(--gold)}
+.plan.ft::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--gold)}
+.pbadge{display:inline-block;background:var(--gold);color:var(--bg);font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:4px 12px;border-radius:2px;margin-bottom:14px}
+.pname{font-family:'Playfair Display',serif;font-size:20px;color:var(--white);margin-bottom:4px}
+.ptag{font-size:13px;color:var(--stone);font-style:italic;margin-bottom:16px}
+.pprice{font-family:'Playfair Display',serif;font-size:40px;color:var(--white);margin-bottom:2px}
+.pprice .cu{font-size:20px;color:var(--gold);vertical-align:top}
+.pper{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold);margin-bottom:16px}
+.pdiv{width:100%;height:1px;background:var(--border);margin:16px 0}
+.pf{list-style:none;margin-bottom:20px}
+.pf li{font-size:13px;color:var(--lunar);margin-bottom:8px;padding-left:18px;position:relative}
+.pf li::before{content:'';position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:1px;background:var(--gold);opacity:.5}
+.pf li b{color:var(--white);font-weight:500}
+.pf li b::before{opacity:1}
+.pbtn{display:block;width:100%;text-align:center;padding:14px;font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;text-decoration:none;border-radius:2px;transition:all .3s}
+.pbtn.p{background:var(--gold);color:var(--bg)}
+.pbtn.p:hover{background:var(--gold-light)}
+.pbtn.s{background:transparent;color:var(--gold);border:1px solid rgba(212,165,116,.3)}
+.pbtn.s:hover{background:rgba(212,165,116,.06)}
+.psave{text-align:center;margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--fire)}
+
+/* QUOTE */
+.quote-section{padding:60px 0;border-top:1px solid var(--border);text-align:center}
+.qs-text{font-family:'Playfair Display',serif;font-size:clamp(17px,2.5vw,22px);color:var(--lunar);font-style:italic;max-width:600px;margin:0 auto 12px;line-height:1.6}
+.qs-ref{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gold)}
+
+/* FOR WHO */
+.forwho{padding:80px 0;border-top:1px solid var(--border)}
+.fw-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:32px}
+.fw-card{border-left:2px solid var(--gold);padding:16px 0 16px 20px}
+.fw-title{font-family:'Playfair Display',serif;font-size:16px;color:var(--white);margin-bottom:4px}
+.fw-desc{font-size:13px;color:var(--stone)}
+
+/* FAQ */
+.faq{padding:80px 0;border-top:1px solid var(--border)}
+.faq-grid{max-width:650px;margin:32px auto 0}
+.faq-item{border-bottom:1px solid var(--border);padding:18px 0}
+.faq-q{font-family:'Playfair Display',serif;font-size:15px;color:var(--white);margin-bottom:6px}
+.faq-a{font-size:13px;color:var(--stone)}
+
+/* CTA FINAL */
+.final{padding:100px 0;text-align:center;border-top:1px solid var(--border);background:radial-gradient(ellipse at 50% 50%,rgba(212,165,116,.03) 0%,transparent 60%)}
+.final .eq{font-size:32px;margin-bottom:16px}
+.final h2{font-family:'Playfair Display',serif;font-size:clamp(26px,4vw,38px);color:var(--white);margin-bottom:8px}
+.final .sub{font-size:15px;color:var(--stone);font-style:italic;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}
+.final a{display:inline-block;background:var(--gold);color:var(--bg);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:18px 48px;border-radius:2px;text-decoration:none;transition:background .3s}
+.final a:hover{background:var(--gold-light)}
+.final .note{font-size:11px;color:var(--smoke);margin-top:14px}
+
+footer{border-top:1px solid var(--border);padding:40px 0;text-align:center}
+footer .fb{font-family:'Playfair Display',serif;font-size:11px;letter-spacing:6px;color:var(--gold);text-transform:uppercase}
+footer .fc{font-size:10px;color:var(--smoke);margin-top:8px;letter-spacing:2px;text-transform:uppercase}
+
+@media(max-width:768px){.pg{grid-template-columns:1fr}.isnot-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="b">5.000 Millas</span>
+  <a href="https://calendly.com/carlosmedinamentor/llamada-de-30-minutos">Agendar llamada</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="ctr">
+    <div class="hl">Mentoría personal con Carlos Medina</div>
+    <h1>Sabes que hay algo más.<br>Pero no sabes <em>cómo llegar.</em></h1>
+    <div class="hero-line"></div>
+    <p>Trabajas, produces, cumples. Pero por dentro sientes que tu vida no refleja quién eres realmente.</p>
+    <p><strong>Eso no es falta de esfuerzo. Es falta de estructura.</strong></p>
+    <p>Yo te acompaño a descubrir tu identidad real, ordenar tu mente, estructurar tu visión y ejecutar con dirección. Sin motivación vacía. Sin coaching genérico. Con verdad, confrontación y un plan.</p>
+    <a href="#planes" class="hero-cta">Ver paquetes</a>
+    <div class="hero-note">+1.000 vidas impactadas · Método BDL · ⛵+💎=🦁</div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain">
+  <div class="ctr">
+    <div class="pain-q">¿Te reconoces en alguna de estas situaciones?</div>
+    <div class="pain-list">
+      <div class="pain-item">Sientes que vives la vida de alguien más. Que lo que haces no tiene que ver con quien eres por dentro.</div>
+      <div class="pain-item">Has intentado cambiar muchas veces — pero siempre vuelves al mismo patrón. Las mismas decisiones. Los mismos resultados.</div>
+      <div class="pain-item">Tienes experiencia y conocimiento, pero no logras convertirlo en algo tangible. Tu potencial está atrapado en tu cabeza.</div>
+      <div class="pain-item">Te comparas constantemente con otros que parecen avanzar más rápido, con menos preparación que tú.</div>
+      <div class="pain-item">Trabajas mucho pero no creces. Tu esfuerzo no se traduce en resultados proporcionales.</div>
+      <div class="pain-item">Sabes que necesitas ayuda, pero la mayoría de lo que encuentras es motivación superficial que no dura más de 3 días.</div>
+      <div class="pain-item">Tienes un negocio (o la idea de uno) pero no sabes cómo estructurarlo para que funcione sin destruirte.</div>
+    </div>
+    <div class="pain-close">Si leíste esto y sentiste que te estaba hablando a ti — es porque te estoy hablando a ti.</div>
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<section class="bridge">
+  <div class="ctr">
+    <p>El problema no es que te falte talento, inteligencia o ganas. El problema es que estás operando desde una <em>identidad fragmentada</em>. Y una identidad fragmentada produce una vida fragmentada. La solución no es más información. Es <em>estructura</em>.</p>
+  </div>
+</section>
+
+<!-- WHAT THIS IS -->
+<section class="what">
+  <div class="ctr">
+    <div class="hl" style="text-align:center">Qué es esta mentoría</div>
+    <div class="st">Estructura para tu identidad, tu mente y tu vida</div>
+    <div class="what-grid">
+      <div class="wc">
+        <div class="wc-icon">⛵</div>
+        <div class="wc-name">Autoconocimiento profundo</div>
+        <div class="wc-desc">Descubrimos quién eres debajo de las capas del ego, las expectativas ajenas y los patrones que heredaste. Tu falso yo deja de gobernar.</div>
+      </div>
+      <div class="wc">
+        <div class="wc-icon">💎</div>
+        <div class="wc-name">Transformación en 7 dimensiones</div>
+        <div class="wc-desc">Trabajamos tu salud física, mental, emocional, espiritual, expresiva, interpersonal y financiera. No se arregla una sola área — se estructura la vida completa.</div>
+      </div>
+      <div class="wc">
+        <div class="wc-icon">🦁</div>
+        <div class="wc-name">Identidad restaurada</div>
+        <div class="wc-desc">Dejas de reaccionar desde el miedo y empiezas a actuar desde el poder, el amor y el dominio propio. La persona que siempre supiste que podías ser.</div>
+      </div>
+      <div class="wc">
+        <div class="wc-icon">🧭</div>
+        <div class="wc-name">Dirección y claridad</div>
+        <div class="wc-desc">Un plan concreto. Qué hacer mañana, la próxima semana, el próximo mes. Sin ambigüedad. Sin excusas. Con fechas y accountability.</div>
+      </div>
+      <div class="wc">
+        <div class="wc-icon">🔥</div>
+        <div class="wc-name">Confrontación con amor</div>
+        <div class="wc-desc">No te digo lo que quieres escuchar. Te digo lo que necesitas escuchar. Las verdades que nadie a tu alrededor se atreve a decirte.</div>
+      </div>
+      <div class="wc">
+        <div class="wc-icon">🏗️</div>
+        <div class="wc-name">Estructura de negocio</div>
+        <div class="wc-desc">Si tienes un negocio o quieres crear uno: tu oferta, tu mensaje, tu sistema de ingresos. Ordenado. Claro. Ejecutable. Sin humo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IS / IS NOT -->
+<section class="isnot">
+  <div class="ctr">
+    <div class="st">Esto no es para todos</div>
+    <div class="isnot-grid">
+      <div class="isnot-col yes">
+        <h3>Esto es</h3>
+        <div class="isnot-item">Acompañamiento 1:1 profundo y personalizado</div>
+        <div class="isnot-item">Confrontación honesta con amor y propósito</div>
+        <div class="isnot-item">Estructura real para tu vida y tu negocio</div>
+        <div class="isnot-item">Un proceso de transformación de identidad</div>
+        <div class="isnot-item">Accountability semanal que no te deja escapar</div>
+        <div class="isnot-item">Fe, propósito y acción combinados</div>
+      </div>
+      <div class="isnot-col no">
+        <h3>Esto NO es</h3>
+        <div class="isnot-item">Coaching genérico de "sé tu mejor versión"</div>
+        <div class="isnot-item">Terapia psicológica</div>
+        <div class="isnot-item">Un curso grabado donde nadie te conoce</div>
+        <div class="isnot-item">Motivación que dura 3 días</div>
+        <div class="isnot-item">Alguien que te dice lo que quieres oír</div>
+        <div class="isnot-item">Una fórmula mágica sin esfuerzo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VERSE -->
+<section class="quote-section">
+  <div class="ctr">
+    <div class="qs-text">"Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio."</div>
+    <div class="qs-ref">2 Timoteo 1:7</div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="planes">
+  <div class="ctr">
+    <div class="hl" style="text-align:center">Paquetes de mentoría</div>
+    <div class="st">Elige el nivel de acompañamiento que necesitas</div>
+
+    <div class="pg">
+
+      <!-- PLAN 1 -->
+      <div class="plan">
+        <div class="pname">Sesión Brújula</div>
+        <div class="ptag">Una sesión de claridad total</div>
+        <div class="pprice"><span class="cu">€</span>150</div>
+        <div class="pper">Sesión única · 90 minutos</div>
+        <div class="pdiv"></div>
+        <ul class="pf">
+          <li><b>Videollamada 1:1 de 90 minutos</b></li>
+          <li>Diagnóstico de identidad (falso yo vs verdadero yo)</li>
+          <li>Mapa de situación actual en las 7 dimensiones</li>
+          <li>Plan de acción escrito post-sesión</li>
+          <li>Grabación completa de la sesión</li>
+        </ul>
+        <a href="https://calendly.com/carlosmedinamentor/llamada-de-30-minutos" class="pbtn s">Agendar sesión</a>
+      </div>
+
+      <!-- PLAN 2 — FEATURED -->
+      <div class="plan ft">
+        <div class="pbadge">Más elegido</div>
+        <div class="pname">Pack Estructura</div>
+        <div class="ptag">4 semanas que cambian el juego</div>
+        <div class="pprice"><span class="cu">€</span>497</div>
+        <div class="pper">4 sesiones semanales · €124/sesión</div>
+        <div class="pdiv"></div>
+        <ul class="pf">
+          <li><b>4 sesiones de 90 min (una por semana)</b></li>
+          <li><b>Diagnóstico BDL completo en 7 dimensiones</b></li>
+          <li><b>Seguimiento diario por WhatsApp (30 días)</b></li>
+          <li>Mapa de identidad personalizado</li>
+          <li>Estructura de negocio clara y ejecutable</li>
+          <li>Plan de acción escrito por sesión</li>
+          <li>Grabación de todas las sesiones</li>
+          <li>Acceso a la comunidad 5.000 Millas</li>
+        </ul>
+        <a href="https://calendly.com/carlosmedinamentor/llamada-de-30-minutos" class="pbtn p">Empezar mi transformación</a>
+        <div class="psave">Ahorras €103 vs sesiones individuales</div>
+      </div>
+
+      <!-- PLAN 3 -->
+      <div class="plan">
+        <div class="pname">Pack León</div>
+        <div class="ptag">Transformación completa en 90 días</div>
+        <div class="pprice"><span class="cu">€</span>1.200</div>
+        <div class="pper">12 sesiones (3 meses) · €100/sesión</div>
+        <div class="pdiv"></div>
+        <ul class="pf">
+          <li><b>12 sesiones de 90 min (semanal)</b></li>
+          <li><b>Diagnóstico BDL profundo + seguimiento trimestral</b></li>
+          <li><b>Seguimiento diario por WhatsApp (90 días)</b></li>
+          <li><b>Restructuración completa de identidad</b></li>
+          <li>Plan de vida y negocio a 12 meses</li>
+          <li>Revisión de decisiones importantes en tiempo real</li>
+          <li>Grabación de todas las sesiones</li>
+          <li>Acceso VIP a la comunidad 5.000 Millas</li>
+          <li>Prioridad en agenda y sesiones de emergencia</li>
+        </ul>
+        <a href="https://calendly.com/carlosmedinamentor/llamada-de-30-minutos" class="pbtn s">Aplicar al Pack León</a>
+        <div class="psave">Ahorras €600 vs sesiones individuales</div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:32px;font-size:13px;color:var(--smoke)">
+      Todos los paquetes se pueden pagar en cuotas. Hablamos en la primera sesión.
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="forwho">
+  <div class="ctr">
+    <div class="hl" style="text-align:center">Para quién es esto</div>
+    <div class="st">Si eres alguna de estas personas, este espacio es para ti</div>
+    <div class="fw-grid">
+      <div class="fw-card">
+        <div class="fw-title">El emprendedor estancado</div>
+        <div class="fw-desc">Tienes un negocio pero no crece. Trabajas 12 horas al día y los números no reflejan tu esfuerzo. Necesitas estructura, no más horas.</div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-title">El profesional en transición</div>
+        <div class="fw-desc">Sabes que tu trabajo actual no es tu destino. Quieres dar el salto pero no tienes claridad de hacia dónde ni cómo hacerlo sin destruir lo que ya tienes.</div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-title">El líder sin dirección</div>
+        <div class="fw-desc">Otros te ven como referente pero por dentro te sientes perdido. Necesitas a alguien que te acompañe con la misma intensidad que tú acompañas a otros.</div>
+      </div>
+      <div class="fw-card">
+        <div class="fw-title">La persona que repite patrones</div>
+        <div class="fw-desc">Mismas relaciones, mismos errores, mismos resultados. No es mala suerte. Es una identidad que no ha sido confrontada ni restructurada.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="ctr">
+    <div class="hl" style="text-align:center">Preguntas frecuentes</div>
+    <div class="st">Lo que necesitas saber</div>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q">¿Las sesiones son presenciales?</div>
+        <div class="faq-a">No. Son por videollamada (Google Meet). Puedes conectarte desde cualquier parte del mundo. Cada sesión se graba para que la revises.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">No sé cuál paquete elegir.</div>
+        <div class="faq-a">Empieza con la Sesión Brújula (€150). En 90 minutos sabré exactamente qué necesitas y tú sabrás si quieres continuar conmigo. Sin compromiso.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Qué pasa en la primera sesión?</div>
+        <div class="faq-a">Hacemos tu diagnóstico completo: quién eres, dónde estás, dónde quieres ir, y qué te está frenando. Sales con un mapa claro de tu situación y un plan de acción concreto.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Esto tiene base religiosa?</div>
+        <div class="faq-a">Tiene base espiritual. Mi principio rector es Dios al centro. Trabajo con principios bíblicos, filosofía, psicología y estrategia de negocios. Si la fe te incomoda, esto no es para ti. Si la fe te llama, estás en casa.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Y si no tengo negocio?</div>
+        <div class="faq-a">No necesitas tener uno. La mentoría trabaja tu identidad primero. El negocio es una consecuencia de saber quién eres. Muchos de mis clientes llegan sin negocio y terminan creando uno desde su esencia.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">¿Cuántas personas atiendes al mes?</div>
+        <div class="faq-a">Máximo 5 personas en mentoría activa. Cada persona recibe mi atención completa. Cuando los espacios se llenan, se abren lista de espera.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="ctr">
+    <div class="eq">⛵ + 💎 = 🦁</div>
+    <h2>Deja de sobrevivir.<br>Empieza a vivir con estructura.</h2>
+    <div class="sub">La diferencia entre donde estás y donde quieres estar es una decisión. Y un acompañante que no te deje rendirte.</div>
+    <a href="https://calendly.com/carlosmedinamentor/llamada-de-30-minutos">Agendar mi primera sesión</a>
+    <div class="note">Máximo 5 personas al mes · Sesiones por videollamada · Grabación incluida</div>
+  </div>
+</section>
+
+<footer>
+  <div class="ctr">
+    <div class="fb">5.000 Millas</div>
+    <div class="fc">⛵+💎=🦁 · Erradicando la pobreza mental · @oficialcarlosmedina</div>
+  </div>
+</footer>
+
+</body>
+</html>
