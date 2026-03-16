@@ -49,24 +49,24 @@
 }
 </script>
 
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --void: #04040a;
-  --deep: #080810;
-  --surface: #0c0c18;
-  --panel: #101020;
-  --border: #1a1a2e;
-  --border-gold: #8b6914;
-  --gold: #c9a84c;
-  --gold-light: #e2c97e;
-  --gold-dim: #7a5e28;
-  --gold-glow: rgba(201,168,76,0.12);
-  --gold-glow-strong: rgba(201,168,76,0.25);
-  --cream: #f5f0e8;
-  --text: #e8e4da;
-  --muted: #6a6458;
-  --faint: #2a2418;
+  --void: #0A0A0A;
+  --deep: #0E0E0E;
+  --surface: #111111;
+  --panel: #111111;
+  --border: #1A1A1A;
+  --border-gold: #D4A574;
+  --gold: #D4A574;
+  --gold-light: #E0BB92;
+  --gold-dim: #A07850;
+  --gold-glow: rgba(212,165,116,0.10);
+  --gold-glow-strong: rgba(212,165,116,0.22);
+  --cream: #FAFAF8;
+  --text: #FAFAF8;
+  --muted: #888880;
+  --faint: #111111;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -76,7 +76,7 @@ html { scroll-behavior: smooth; }
 body {
   background: var(--void);
   color: var(--text);
-  font-family: 'EB Garamond', serif;
+  font-family: 'Outfit', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
   cursor: none;
@@ -87,7 +87,7 @@ body {
   position: fixed;
   width: 8px; height: 8px;
   background: var(--gold);
-  border-radius: 50%;
+  border-radius: 2px;
   pointer-events: none;
   z-index: 9999;
   transition: transform 0.15s ease;
@@ -97,7 +97,7 @@ body {
   position: fixed;
   width: 32px; height: 32px;
   border: 1px solid var(--gold);
-  border-radius: 50%;
+  border-radius: 2px;
   pointer-events: none;
   z-index: 9998;
   opacity: 0.4;
@@ -128,7 +128,7 @@ body::before {
   background: none;
   border: 1px solid var(--border-gold);
   color: var(--muted);
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 10px;
   letter-spacing: 3px;
   padding: 8px 16px;
@@ -156,13 +156,13 @@ nav {
   transition: all 0.5s;
 }
 nav.scrolled {
-  background: rgba(4,4,10,0.95);
+  background: rgba(10,10,10,0.95);
   border-bottom-color: var(--border);
   backdrop-filter: blur(20px);
   padding: 18px 60px;
 }
 .nav-logo {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 13px;
   letter-spacing: 6px;
   color: var(--gold);
@@ -174,7 +174,7 @@ nav.scrolled {
   list-style: none;
 }
 .nav-links a {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 9px;
   letter-spacing: 4px;
   color: var(--muted);
@@ -203,7 +203,7 @@ nav.scrolled {
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212,165,116,0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -217,7 +217,7 @@ nav.scrolled {
 }
 
 .hero-eyebrow {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 10px;
   letter-spacing: 8px;
   color: var(--gold-dim);
@@ -228,7 +228,7 @@ nav.scrolled {
 }
 
 .hero-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: clamp(4rem, 12vw, 9rem);
   font-weight: 300;
   line-height: 0.9;
@@ -246,7 +246,7 @@ nav.scrolled {
 }
 
 .hero-number {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: clamp(1rem, 2.5vw, 1.5rem);
   letter-spacing: 8px;
   color: var(--gold);
@@ -257,7 +257,7 @@ nav.scrolled {
 }
 
 .hero-tagline {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: clamp(1rem, 2vw, 1.4rem);
   font-style: italic;
   color: var(--muted);
@@ -288,7 +288,7 @@ nav.scrolled {
   animation: scrollPulse 2s ease-in-out infinite;
 }
 .scroll-text {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 8px;
   letter-spacing: 4px;
   color: var(--gold-dim);
@@ -319,7 +319,7 @@ section {
 }
 
 .section-label {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 9px;
   letter-spacing: 8px;
   color: var(--gold-dim);
@@ -336,7 +336,7 @@ section {
 }
 
 .section-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
   font-weight: 300;
   line-height: 1.1;
@@ -347,10 +347,10 @@ section {
 .section-title em { font-style: italic; color: var(--gold); }
 
 .body-text {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1.2rem;
   line-height: 2;
-  color: #a09888;
+  color: var(--muted);
   margin-bottom: 32px;
 }
 
@@ -383,7 +383,7 @@ section {
   margin-bottom: 12px;
 }
 .eq-name {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 11px;
   letter-spacing: 6px;
   color: var(--gold);
@@ -392,13 +392,13 @@ section {
   margin-bottom: 6px;
 }
 .eq-desc {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-style: italic;
   font-size: 0.9rem;
   color: var(--muted);
 }
 .eq-operator {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 4rem;
   color: var(--gold-dim);
   font-weight: 300;
@@ -436,7 +436,7 @@ section {
 .dim-card:hover { background: var(--surface); }
 
 .dim-number {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 2rem;
   font-style: italic;
   color: var(--gold);
@@ -444,7 +444,7 @@ section {
   margin-bottom: 8px;
 }
 .dim-name {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 8px;
   letter-spacing: 2px;
   color: var(--text);
@@ -460,7 +460,7 @@ section {
   background: var(--gold-glow);
 }
 .verse-text {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.6rem;
   font-style: italic;
   font-weight: 300;
@@ -469,7 +469,7 @@ section {
   margin-bottom: 12px;
 }
 .verse-ref {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 9px;
   letter-spacing: 5px;
   color: var(--gold-dim);
@@ -502,7 +502,7 @@ section {
 }
 .vision-card:hover::after { opacity: 1; }
 .vision-card-label {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 9px;
   letter-spacing: 5px;
   color: var(--gold);
@@ -510,7 +510,7 @@ section {
   margin-bottom: 20px;
 }
 .vision-card-title {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   font-weight: 300;
   line-height: 1.3;
@@ -518,7 +518,7 @@ section {
   color: var(--cream);
 }
 .vision-card-body {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1rem;
   line-height: 1.9;
   color: var(--muted);
@@ -538,7 +538,7 @@ section {
   text-align: center;
 }
 .formula-number {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 5rem;
   font-weight: 300;
   color: var(--gold);
@@ -546,7 +546,7 @@ section {
   margin-bottom: 8px;
 }
 .formula-unit {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 9px;
   letter-spacing: 4px;
   color: var(--gold-dim);
@@ -554,7 +554,7 @@ section {
   margin-bottom: 16px;
 }
 .formula-desc {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1rem;
   color: var(--muted);
   line-height: 1.6;
@@ -595,7 +595,7 @@ section {
 .company-tile:hover::before { transform: scaleX(1); }
 
 .company-name {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 10px;
   letter-spacing: 3px;
   color: var(--text);
@@ -603,14 +603,14 @@ section {
   margin-bottom: 8px;
 }
 .company-desc {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 0.9rem;
   color: var(--muted);
   line-height: 1.6;
   margin-bottom: 16px;
 }
 .company-status {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 8px;
   letter-spacing: 3px;
   color: var(--border-gold);
@@ -637,7 +637,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-style: italic;
   font-size: 1.2rem;
   color: var(--gold-dim);
@@ -647,7 +647,7 @@ section {
   padding: 24px 32px;
 }
 .value-name {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 10px;
   letter-spacing: 4px;
   color: var(--gold);
@@ -655,7 +655,7 @@ section {
   margin-bottom: 8px;
 }
 .value-desc {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 1rem;
   color: var(--muted);
   line-height: 1.7;
@@ -676,7 +676,7 @@ section {
   margin-bottom: 40px;
 }
 .internal-badge span {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 9px;
   letter-spacing: 4px;
   color: var(--gold);
@@ -684,7 +684,7 @@ section {
 }
 .internal-dot {
   width: 6px; height: 6px;
-  border-radius: 50%;
+  border-radius: 2px;
   background: var(--gold);
   animation: blink 1.5s ease-in-out infinite;
 }
@@ -706,7 +706,7 @@ section {
   display: block;
 }
 .ops-title {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 10px;
   letter-spacing: 3px;
   color: var(--gold);
@@ -714,7 +714,7 @@ section {
   margin-bottom: 12px;
 }
 .ops-body {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 0.95rem;
   color: var(--muted);
   line-height: 1.8;
@@ -737,7 +737,7 @@ section {
 .divider::before { left: 0; }
 .divider::after { right: 0; background: linear-gradient(90deg, var(--border), transparent); }
 .divider-symbol {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
   color: var(--gold-dim);
   letter-spacing: 20px;
@@ -752,19 +752,19 @@ footer {
   justify-content: space-between;
 }
 .footer-logo {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 16px;
   letter-spacing: 8px;
   color: var(--gold);
 }
 .footer-sub {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Outfit', sans-serif;
   font-style: italic;
   font-size: 1rem;
   color: var(--muted);
 }
 .footer-copy {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 8px;
   letter-spacing: 3px;
   color: var(--muted);
@@ -775,7 +775,7 @@ footer {
   position: absolute;
   inset: 0;
   opacity: 0.06;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500'%3E%3Cpath fill='%23c9a84c' d='M150 120 Q180 100 220 110 Q260 90 280 120 Q300 140 270 160 Q240 180 200 170 Q160 160 140 140 Z M300 80 Q340 60 380 70 Q420 55 450 80 Q470 100 440 120 Q410 140 370 130 Q330 120 310 100 Z M500 60 Q550 40 600 55 Q640 45 670 70 Q690 90 660 110 Q630 130 580 120 Q540 110 520 90 Z M700 90 Q740 75 770 90 Q800 100 790 120 Q775 140 740 135 Q710 125 700 110 Z M100 200 Q140 185 170 200 Q200 210 190 230 Q175 250 145 245 Q115 235 100 220 Z M250 220 Q290 205 320 220 Q350 230 340 255 Q320 275 285 268 Q255 258 245 240 Z M420 190 Q470 170 510 185 Q545 195 535 220 Q518 240 475 235 Q440 225 420 210 Z M600 170 Q650 155 690 170 Q725 182 715 205 Q698 225 655 218 Q620 208 605 190 Z M800 140 Q840 125 870 140 Q898 152 885 175 Q868 195 830 188 Q798 178 785 160 Z M180 300 Q220 285 255 300 Q285 312 275 335 Q258 355 220 348 Q188 338 175 320 Z M380 280 Q425 265 460 282 Q492 295 480 320 Q462 340 420 332 Q385 322 370 305 Z M580 270 Q625 255 660 272 Q692 285 680 310 Q662 330 620 322 Q585 312 570 295 Z M780 250 Q820 235 850 252 Q878 265 865 290 Q848 310 808 302 Q775 292 762 275 Z'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 500'%3E%3Cpath fill='%23D4A574' d='M150 120 Q180 100 220 110 Q260 90 280 120 Q300 140 270 160 Q240 180 200 170 Q160 160 140 140 Z M300 80 Q340 60 380 70 Q420 55 450 80 Q470 100 440 120 Q410 140 370 130 Q330 120 310 100 Z M500 60 Q550 40 600 55 Q640 45 670 70 Q690 90 660 110 Q630 130 580 120 Q540 110 520 90 Z M700 90 Q740 75 770 90 Q800 100 790 120 Q775 140 740 135 Q710 125 700 110 Z M100 200 Q140 185 170 200 Q200 210 190 230 Q175 250 145 245 Q115 235 100 220 Z M250 220 Q290 205 320 220 Q350 230 340 255 Q320 275 285 268 Q255 258 245 240 Z M420 190 Q470 170 510 185 Q545 195 535 220 Q518 240 475 235 Q440 225 420 210 Z M600 170 Q650 155 690 170 Q725 182 715 205 Q698 225 655 218 Q620 208 605 190 Z M800 140 Q840 125 870 140 Q898 152 885 175 Q868 195 830 188 Q798 178 785 160 Z M180 300 Q220 285 255 300 Q285 312 275 335 Q258 355 220 348 Q188 338 175 320 Z M380 280 Q425 265 460 282 Q492 295 480 320 Q462 340 420 332 Q385 322 370 305 Z M580 270 Q625 255 660 272 Q692 285 680 310 Q662 330 620 322 Q585 312 570 295 Z M780 250 Q820 235 850 252 Q878 265 865 290 Q848 310 808 302 Q775 292 762 275 Z'/%3E%3C/svg%3E");
   background-size: cover;
   background-position: center;
   pointer-events: none;
@@ -797,7 +797,7 @@ footer {
   text-align: center;
 }
 .method-name {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 11px;
   letter-spacing: 4px;
   color: var(--gold);
@@ -805,7 +805,7 @@ footer {
   margin-bottom: 4px;
 }
 .method-label {
-  font-family: 'EB Garamond', serif;
+  font-family: 'Outfit', sans-serif;
   font-style: italic;
   font-size: 0.85rem;
   color: var(--muted);
@@ -831,14 +831,14 @@ footer {
   text-align: center;
 }
 .proof-number {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Playfair Display', serif;
   font-size: 1.8rem;
   font-weight: 300;
   color: var(--gold);
   line-height: 1;
 }
 .proof-text {
-  font-family: 'Cinzel', serif;
+  font-family: 'Outfit', sans-serif;
   font-size: 8px;
   letter-spacing: 3px;
   color: var(--muted);
@@ -1458,8 +1458,8 @@ body.lang-en span.en { display: inline !important; }
     </div>
   </div>
   <div style="text-align:center;">
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--gold-dim);margin-bottom:8px;">⛵ + 💎 = 🦁</div>
-    <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;color:var(--muted);">BDL METHOD</div>
+    <div style="font-family:'Playfair Display',serif;font-style:italic;font-size:1.1rem;color:var(--gold-dim);margin-bottom:8px;">⛵ + 💎 = 🦁</div>
+    <div style="font-family:'Outfit',sans-serif;font-size:9px;letter-spacing:4px;color:var(--muted);">BDL METHOD</div>
   </div>
   <div>
     <div class="footer-copy">© 5,000 Millas · Carlos Medina</div>
